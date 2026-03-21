@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wevion Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:'Manrope',sans-serif;
+  background:#07070e;color:#fff;
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  padding:40px 20px;
+}
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:
+    linear-gradient(rgba(124,58,237,0.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(124,58,237,0.05) 1px,transparent 1px);
+  background-size:50px 50px;
+  pointer-events:none;
+}
+.box{
+  max-width:520px;width:100%;
+  background:rgba(15,15,25,0.9);
+  padding:48px 44px;border-radius:24px;
+  border:1px solid rgba(124,58,237,0.2);
+  box-shadow:0 40px 80px rgba(0,0,0,0.6),0 0 80px rgba(124,58,237,0.05);
+  backdrop-filter:blur(20px);
+  animation:boxIn 0.6s ease forwards;
+}
+@keyframes boxIn{
+  from{opacity:0;transform:translateY(30px);}
+  to{opacity:1;transform:translateY(0);}
+}
+.logo{
+  font-family:'Syne',sans-serif;
+  font-size:1.8rem;font-weight:800;
+  background:linear-gradient(90deg,#a78bfa,#7c3aed,#c084fc);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:8px;
+}
+h2{font-family:'Syne',sans-serif;font-size:1.5rem;margin-bottom:28px;color:#fff;font-weight:700;}
+h3{font-family:'Syne',sans-serif;font-size:1.1rem;margin:28px 0 12px;color:#a78bfa;}
+input{
+  width:100%;padding:14px 18px;
+  margin:8px 0;border-radius:10px;
+  border:1px solid rgba(124,58,237,0.2);
+  background:rgba(124,58,237,0.07);
+  color:#fff;font-family:'Manrope',sans-serif;
+  font-size:0.95rem;outline:none;
+  transition:border-color 0.3s,box-shadow 0.3s;
+}
+input:focus{
+  border-color:rgba(124,58,237,0.6);
+  box-shadow:0 0 0 3px rgba(124,58,237,0.1);
+}
+input::placeholder{color:#555577;}
+button{
+  width:100%;padding:14px;
+  margin:10px 0 0;border-radius:10px;border:none;
+  font-family:'Manrope',sans-serif;
+  font-weight:600;cursor:pointer;font-size:0.95rem;
+  transition:all 0.3s;
+}
+.btn-primary{
+  background:linear-gradient(90deg,#7c3aed,#a78bfa);
+  color:#fff;
+  box-shadow:0 4px 20px rgba(124,58,237,0.35);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(124,58,237,0.5);}
+.btn-danger{background:rgba(231,76,60,0.15);color:#e74c3c;border:1px solid rgba(231,76,60,0.3);width:auto;padding:8px 18px;margin-left:10px;border-radius:8px;}
+.btn-danger:hover{background:rgba(231,76,60,0.3);}
+.btn-logout{background:rgba(231,76,60,0.1);color:#e74c3c;border:1px solid rgba(231,76,60,0.25);margin-top:28px;}
+.btn-logout:hover{background:rgba(231,76,60,0.2);}
+.hidden{display:none !important;}
+.project-item{
+  background:rgba(124,58,237,0.07);
+  border:1px solid rgba(124,58,237,0.15);
+  padding:14px 18px;margin:10px 0;border-radius:12px;
+  display:flex;justify-content:space-between;align-items:center;
+  transition:border-color 0.3s;
+}
+.project-item:hover{border-color:rgba(124,58,237,0.35);}
+.project-item strong{color:#e2e2ff;display:block;margin-bottom:4px;}
+.project-item span{color:#8888bb;font-size:0.88rem;}
+#login-error{color:#ff6b6b;text-align:center;margin-top:10px;font-size:0.9rem;min-height:20px;}
+.success-msg{color:#22c55e;text-align:center;margin-top:10px;font-size:0.9rem;}
+</style>
+</head>
+<body>
+<div id="login-box" class="box">
+  <div class="logo">Wevion</div>
+  <h2>Admin Login</h2>
+  <input type="text" id="admin-id" placeholder="Admin ID" value="admin">
+  <input type="password" id="admin-pass" placeholder="Password">
+  <button class="btn-primary" onclick="login()">Login →</button>
+  <p id="login-error"></p>
+</div>
+<div id="dashboard" class="box hidden" style="max-width:600px;">
+  <div class="logo">Wevion</div>
+  <h2>Admin Panel</h2>
+  <h3>Add New Project</h3>
+  <input type="text" id="proj-title" placeholder="Project Title">
+  <input type="text" id="proj-desc" placeholder="Short Description">
+  <input type="text" id="proj-img" placeholder="Image URL (optional)">
+  <button class="btn-primary" onclick="addProject()">Add Project →</button>
+  <p id="add-msg"></p>
+  <h3 style="margin-top:36px;">Current Projects</h3>
+  <div id="project-list"></div>
+  <button class="btn-logout" onclick="logout()">Logout</button>
+</div>
+<script>
+const ADMIN_ID = "admin";
+const ADMIN_PASS = "wevion2026";
+function login() {
+  const id = document.getElementById("admin-id").value;
+  const pass = document.getElementById("admin-pass").value;
+  if (id === ADMIN_ID && pass === ADMIN_PASS) {
+    document.getElementById("login-box").classList.add("hidden");
+    document.getElementById("dashboard").classList.remove("hidden");
+    loadProjects();
+  } else {
+    document.getElementById("login-error").textContent = "Wrong ID or Password";
+  }
+}
+function addProject() {
+  const title = document.getElementById("proj-title").value.trim();
+  const desc = document.getElementById("proj-desc").value.trim();
+  const img = document.getElementById("proj-img").value.trim() || "https://picsum.photos/id/237/600/380";
+  const msg = document.getElementById("add-msg");
+  if (!title || !desc) { msg.style.color="#ff6b6b"; msg.textContent = "Title and Description required."; return; }
+  let projects = JSON.parse(localStorage.getItem("wevionProjects")) || [];
+  projects.push({ title, desc, img });
+  localStorage.setItem("wevionProjects", JSON.stringify(projects));
+  msg.style.color="#22c55e"; msg.textContent = "✓ Project Added Successfully!";
+  document.getElementById("proj-title").value = "";
+  document.getElementById("proj-desc").value = "";
+  document.getElementById("proj-img").value = "";
+  setTimeout(() => msg.textContent = "", 3000);
+  loadProjects();
+}
+function deleteProject(index) {
+  if (!confirm("Delete this project permanently?")) return;
+  let projects = JSON.parse(localStorage.getItem("wevionProjects")) || [];
+  projects.splice(index, 1);
+  localStorage.setItem("wevionProjects", JSON.stringify(projects));
+  loadProjects();
+}
+function loadProjects() {
+  const list = document.getElementById("project-list");
+  let projects = JSON.parse(localStorage.getItem("wevionProjects")) || [];
+  if (projects.length === 0) {
+    list.innerHTML = "<p style='color:#555577;text-align:center;padding:20px 0;'>No projects added yet.</p>";
+    return;
+  }
+  list.innerHTML = projects.map((p, i) => `
+    <div class="project-item">
+      <div>
+        <strong>${p.title}</strong>
+        <span>${p.desc.substring(0, 60)}${p.desc.length > 60 ? "…" : ""}</span>
+      </div>
+      <button class="btn-danger" onclick="deleteProject(${i})">Delete</button>
+    </div>`).join("");
+}
+function logout() {
+  document.getElementById("dashboard").classList.add("hidden");
+  document.getElementById("login-box").classList.remove("hidden");
+  document.getElementById("login-error").textContent = "";
+}
+</script>
+</body>
+</html>

@@ -1,292 +1,272 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wevion | Modern Digital Studio</title>
-<meta name="description" content="Wevion — Modern Digital Studio crafting websites, brands and digital cards.">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wevion | Modern Digital Studio</title>
+  <meta name="description" content="Wevion — Modern Digital Studio crafting websites, brands and digital cards.">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700;1,800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div id="loader">
-  <div class="loader-logo">
-    <span>W</span><span>e</span><span>v</span><span>i</span><span>o</span><span>n</span>
-  </div>
-  <div class="loader-bar"><div class="loader-fill"></div></div>
-  <p class="loader-sub">Crafting your experience...</p>
-</div>
-
-<canvas id="particles-canvas"></canvas>
-<div class="cursor-glow"></div>
-<div class="cursor-ring"></div>
-<div class="custom-cursor"></div>
-
-<header class="navbar">
-  <img src="wevionlogo.jpeg" alt="Wevion" class="logo-img" onerror="this.style.display='none'">
-  <nav class="nav-desktop">
-    <ul>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#work">Work</a></li>
-      <li><a href="#process">Process</a></li>
-      <li><a href="#testimonials">Testimonials</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
-  <div class="nav-actions">
-    <a href="admin.html" class="nav-admin">⚙ Admin</a>
-    <a href="https://wa.me/917768989575" class="nav-cta magnetic-btn" target="_blank">Chat with us</a>
-  </div>
-  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-    <span></span><span></span><span></span>
-  </button>
-</header>
-
-<div class="mobile-nav" id="mobile-nav">
-  <nav>
-    <a href="#services" class="mobile-link">Services</a>
-    <a href="#work" class="mobile-link">Work</a>
-    <a href="#process" class="mobile-link">Process</a>
-    <a href="#testimonials" class="mobile-link">Testimonials</a>
-    <a href="#contact" class="mobile-link">Contact</a>
-    <a href="https://wa.me/917768989575" class="mobile-cta" target="_blank">💬 Chat with us</a>
-  </nav>
-</div>
-
-<section class="hero" id="home">
-  <div class="aurora"></div>
-  <div class="hero-glow-1"></div>
-  <div class="hero-glow-2"></div>
-  <div class="hero-glow-3"></div>
-  <div class="hero-spotlight" id="hero-spotlight"></div>
-  <div class="hero-content">
-    <div class="hero-badge">
-      <span class="badge-dot"></span>
-      Hi, we're Wevion — Open for Projects
+  <div id="loader">
+    <div class="loader-logo">
+      <span>W</span><span>e</span><span>v</span><span>i</span><span>o</span><span>n</span>
     </div>
-    <h1>
-      <span class="line1 split-text">You Think,</span>
-      <span class="line2 split-text">We Develop.</span>
-    </h1>
-    <p class="hero-sub">Websites, templates and digital cards crafted with<br>precision, motion and soul.</p>
-    <div class="hero-buttons">
-      <a href="#contact" class="btn primary magnetic-btn">Start a Project →</a>
-      <a href="#work" class="btn secondary magnetic-btn">View Our Work</a>
-    </div>
-    <div class="scroll-indicator">
-      <span>Scroll to explore</span>
-      <div class="scroll-line"></div>
+    <p class="loader-tagline">You Think, We Develop.</p>
+    <div class="loader-bar"><div class="loader-fill"></div></div>
+    <div class="loader-dots">
+      <span></span><span></span><span></span>
     </div>
   </div>
-  <div class="floating shape1"></div>
-  <div class="floating shape2"></div>
-  <div class="floating shape3"></div>
-  <div class="floating shape4"></div>
-  <div class="floating shape5"></div>
-  <div class="orbit orbit-1"></div>
-  <div class="orbit orbit-2"></div>
-</section>
 
-<div class="marquee-strip">
-  <div class="marquee-track">
-    <span class="marquee-item">WEBSITES</span><span class="marquee-dot">✦</span>
-    <span class="marquee-item">BRANDING</span><span class="marquee-dot">✦</span>
-    <span class="marquee-item">DIGITAL CARDS</span><span class="marquee-dot">✦</span>
-    <span class="marquee-item">UI/UX DESIGN</span><span class="marquee-dot">✦</span>
-    <span class="marquee-item">LOGOS</span><span class="marquee-dot">✦</span>
-    <span class="marquee-item">ANIMATIONS</span><span class="marquee-dot">✦</span>
-    <span class="marquee-item">WEBSITES</span><span class="marquee-dot">✦</span>
-    <span class="marquee-item">BRANDING</span><span class="marquee-dot">✦</span>
-    <span class="marquee-item">DIGITAL CARDS</span><span class="marquee-dot">✦</span>
-    <span class="marquee-item">UI/UX DESIGN</span><span class="marquee-dot">✦</span>
-    <span class="marquee-item">LOGOS</span><span class="marquee-dot">✦</span>
-    <span class="marquee-item">ANIMATIONS</span><span class="marquee-dot">✦</span>
-  </div>
-</div>
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
 
-<div class="stats-strip reveal">
-  <div class="stat">
-    <span class="stat-number" data-count="20">0</span>
-    <div class="stat-label">Projects Delivered</div>
-  </div>
-  <div class="stat">
-    <span class="stat-number" data-count="100">0</span>
-    <div class="stat-label">Client Satisfaction %</div>
-  </div>
-  <div class="stat">
-    <span class="stat-number" data-count="3">0</span>
-    <div class="stat-label">Core Services</div>
-  </div>
-  <div class="stat">
-    <span class="stat-number" data-count="2026">0</span>
-    <div class="stat-label">Founded</div>
-  </div>
-</div>
+  <header class="navbar" id="navbar">
+    <img src="wevionlogo-removebg-preview.png" alt="Wevion" class="logo-img" onerror="this.style.display='none'">
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#work">Work</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-right">
+      <a href="admin.html" class="nav-admin">Admin</a>
+      <a href="https://wa.me/917768989575" class="nav-cta" target="_blank">Get Started</a>
+    </div>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </header>
 
-<section id="services" class="section">
-  <div class="section-label reveal">What We Do</div>
-  <h2 class="reveal">Our Services</h2>
-  <p class="section-sub reveal">From idea to launch — we craft digital experiences that leave an impression.</p>
-  <div class="cards">
-    <div class="card tilt-card reveal-card">
-      <div class="card-glare"></div>
-      <div class="card-glow-border"></div>
-      <img src="https://picsum.photos/id/1015/600/380" alt="Website Development" class="service-img">
-      <div class="card-icon">🌐</div>
-      <h3>Website Development</h3>
-      <p>Full-stack custom websites with stunning animations, responsive design &amp; lightning-fast performance tailored to your brand.</p>
-      <span class="card-tag">Most Popular</span>
-    </div>
-    <div class="card tilt-card reveal-card">
-      <div class="card-glare"></div>
-      <div class="card-glow-border"></div>
-      <img src="https://picsum.photos/id/180/600/380" alt="Logos" class="service-img">
-      <div class="card-icon">✏️</div>
-      <h3>Logos &amp; Branding</h3>
-      <p>Premium logo design, brand identity kits &amp; vector illustrations — your visual story, perfected from concept to final.</p>
-      <span class="card-tag">Creative</span>
-    </div>
-    <div class="card tilt-card reveal-card">
-      <div class="card-glare"></div>
-      <div class="card-glow-border"></div>
-      <img src="card1.png" alt="Digital Cards" class="service-img" onerror="this.src='https://picsum.photos/id/251/600/380'">
-      <div class="card-icon">💳</div>
-      <h3>Digital Cards</h3>
-      <p>Interactive digital wedding invitations, business cards &amp; portfolios. One tap to share, impossible to forget.</p>
-      <span class="card-tag">Trending</span>
-    </div>
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="#services">Services</a>
+    <a href="#work">Work</a>
+    <a href="#testimonials">Testimonials</a>
+    <a href="#contact">Contact</a>
+    <a href="https://wa.me/917768989575" target="_blank">Chat with us</a>
   </div>
-</section>
 
-<section id="work" class="section">
-  <div class="section-label reveal">Portfolio</div>
-  <h2 class="reveal">Our Work <span id="work-count-badge" class="work-count"></span></h2>
-  <p class="section-sub reveal">Real projects, real results — built with passion.</p>
-  <div class="work-grid" id="work-cards"></div>
-</section>
-
-<section id="process" class="section process-section">
-  <div class="section-label reveal">How We Work</div>
-  <h2 class="reveal">Our Process</h2>
-  <p class="section-sub reveal">Simple, transparent, and results-driven — every time.</p>
-  <div class="process-timeline">
-    <div class="process-step reveal-card">
-      <div class="step-number">01</div>
-      <div class="step-icon">💬</div>
-      <h3>Discovery</h3>
-      <p>We understand your vision, goals and audience through a focused conversation.</p>
+  <section class="hero" id="home">
+    <div class="hero-bg" id="hero-bg"></div>
+    <div class="hero-bokeh">
+      <div class="bokeh b1"></div>
+      <div class="bokeh b2"></div>
+      <div class="bokeh b3"></div>
+      <div class="bokeh b4"></div>
+      <div class="bokeh b5"></div>
+      <div class="bokeh b6"></div>
+      <div class="bokeh b7"></div>
     </div>
-    <div class="process-connector"></div>
-    <div class="process-step reveal-card">
-      <div class="step-number">02</div>
-      <div class="step-icon">🎨</div>
-      <h3>Design</h3>
-      <p>We craft the visual identity — layouts, colors and animations that tell your story.</p>
-    </div>
-    <div class="process-connector"></div>
-    <div class="process-step reveal-card">
-      <div class="step-number">03</div>
-      <div class="step-icon">⚡</div>
-      <h3>Develop</h3>
-      <p>We build it — clean code, smooth animations, mobile-first and blazing fast.</p>
-    </div>
-    <div class="process-connector"></div>
-    <div class="process-step reveal-card">
-      <div class="step-number">04</div>
-      <div class="step-icon">🚀</div>
-      <h3>Launch</h3>
-      <p>We deploy and hand it over — your project goes live, ready to impress.</p>
-    </div>
-  </div>
-</section>
-
-<section id="testimonials" class="section">
-  <div class="section-label reveal">Reviews</div>
-  <h2 class="reveal">What Clients Say</h2>
-  <p class="section-sub reveal">Words from the people who trusted us with their vision.</p>
-  <div class="testimonials-grid">
-    <div class="testimonial-card reveal-card">
-      <div class="testimonial-quote">"</div>
-      <div class="stars">★★★★★</div>
-      <p>"Professional design and smooth delivery. They understood exactly what I needed — no back and forth."</p>
-      <div class="testimonial-author">
-        <div class="author-avatar">DP</div>
-        <div><strong>Darpan Patil</strong><span>Darpan Enterprises</span></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Hi, we are Wevion — Open for Projects</p>
+      <h1 class="hero-heading">
+        The Website<br>
+        <em>Your Brand</em><br>
+        Deserves.
+      </h1>
+      <p class="hero-sub">We build web experiences that transcend the ordinary — immersive, cinematic, and unmistakably yours.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-hero-primary">Start a Project</a>
+        <a href="#work" class="btn-hero-secondary">View Our Work</a>
       </div>
     </div>
-    <div class="testimonial-card reveal-card">
-      <div class="testimonial-quote">"</div>
-      <div class="stars">★★★★★</div>
-      <p>"Modern, animated and high quality work. My website looks incredible — clients keep complimenting it."</p>
-      <div class="testimonial-author">
-        <div class="author-avatar">DC</div>
-        <div><strong>Dimpal Chaudhari</strong><span>Business Owner</span></div>
-      </div>
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-bar"></div>
     </div>
-    <div class="testimonial-card reveal-card">
-      <div class="testimonial-quote">"</div>
-      <div class="stars">★★★★★</div>
-      <p>"They brought my idea to life beautifully. The card was exactly what I envisioned — and even better."</p>
-      <div class="testimonial-author">
-        <div class="author-avatar">VC</div>
-        <div><strong>Vrundhavan Collection</strong><span>Saree Business</span></div>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<section id="contact" class="section">
-  <div class="section-label reveal">Let's Talk</div>
-  <h2 class="reveal">Get In Touch</h2>
-  <p class="contact-sub reveal">Reach us directly — we respond fast.</p>
-  <div class="pyramid-contact">
-    <div class="pyramid-top">
-      <div class="contact-card tilt-card reveal">
-        <div class="card-glare"></div>
-        <div class="contact-badge">Main Contact</div>
-        <h3>Supriti Patil</h3>
-        <p>+91 7768989575</p>
-        <a href="https://wa.me/917768989575" target="_blank" class="whatsapp-btn magnetic-btn">💬 WhatsApp</a>
-      </div>
-    </div>
-    <div class="pyramid-bottom">
-      <div class="contact-card tilt-card reveal">
-        <div class="card-glare"></div>
-        <h3>Shaantanu Varade</h3>
-        <p>+91 9322503616</p>
-        <a href="https://wa.me/919322503616" target="_blank" class="whatsapp-btn magnetic-btn">💬 WhatsApp</a>
-      </div>
-      <div class="contact-card tilt-card reveal">
-        <div class="card-glare"></div>
-        <h3>Rudresh Borole</h3>
-        <p>+91 8261836521</p>
-        <a href="https://wa.me/918261836521" target="_blank" class="whatsapp-btn magnetic-btn">💬 WhatsApp</a>
-      </div>
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span>WEBSITES</span><b>✦</b><span>BRANDING</span><b>✦</b>
+      <span>DIGITAL CARDS</span><b>✦</b><span>UI/UX</span><b>✦</b>
+      <span>LOGOS</span><b>✦</b><span>ANIMATIONS</span><b>✦</b>
+      <span>WEBSITES</span><b>✦</b><span>BRANDING</span><b>✦</b>
+      <span>DIGITAL CARDS</span><b>✦</b><span>UI/UX</span><b>✦</b>
+      <span>LOGOS</span><b>✦</b><span>ANIMATIONS</span><b>✦</b>
     </div>
   </div>
-  <div class="general-contact reveal">
-    <h3>Or reach out through these channels</h3>
-    <p><strong>Email:</strong> <a href="mailto:wevion.0103@gmail.com">wevion.0103@gmail.com</a></p>
-    <p style="margin-top:8px"><strong>Instagram:</strong> <a href="https://instagram.com/wevion.0103" target="_blank">@wevion.0103</a></p>
-  </div>
-</section>
 
-<footer>
-  <div class="footer-glow"></div>
-  <div class="footer-content">
-    <div class="footer-brand">Wevion</div>
-    <p>You Think, We Develop — Modern Digital Studio</p>
-    <div class="footer-links">
-      <a href="#services">Services</a><span>·</span>
-      <a href="#work">Work</a><span>·</span>
-      <a href="#contact">Contact</a><span>·</span>
-      <a href="admin.html">Admin</a>
+  <section class="stats-section">
+    <div class="stats-bg"></div>
+    <div class="stats-bokeh">
+      <div class="bokeh b1"></div>
+      <div class="bokeh b3"></div>
     </div>
-    <p style="margin-top:16px;font-size:0.82rem;">© 2026 Wevion. All rights reserved.</p>
-  </div>
-</footer>
+    <div class="stats-overlay"></div>
+    <div class="stats-inner reveal">
+      <div class="stat">
+        <span class="stat-icon">🎨</span>
+        <span class="stat-title">Custom Design</span>
+        <span class="stat-lbl">Built from scratch, no templates</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-icon">⚡</span>
+        <span class="stat-title">Fast Delivery</span>
+        <span class="stat-lbl">Live in days, not months</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-icon">📱</span>
+        <span class="stat-title">Fully Responsive</span>
+        <span class="stat-lbl">Flawless on every device</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-icon">🔒</span>
+        <span class="stat-title">Secure &amp; Reliable</span>
+        <span class="stat-lbl">Hosted, safe and always online</span>
+      </div>
+    </div>
+  </section>
 
-<script src="script.js"></script>
+  <section class="cin-section services-section" id="services">
+    <div class="cin-bg services-bg"></div>
+    <div class="cin-bokeh">
+      <div class="bokeh b2"></div>
+      <div class="bokeh b4"></div>
+      <div class="bokeh b6"></div>
+    </div>
+    <div class="cin-overlay"></div>
+    <div class="cin-content">
+      <p class="eyebrow reveal">What We Do</p>
+      <h2 class="cin-heading reveal">Design that feels like<br><em>a world, not a template.</em></h2>
+      <p class="cin-sub reveal">From idea to launch — we craft digital experiences that leave an impression.</p>
+      <div class="cards-grid" id="services-grid"></div>
+      <div id="services-empty" class="empty-state reveal">
+        <span>🚀</span>
+        <p>Service cards coming soon — add them via Admin Panel</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cin-section work-section" id="work">
+    <div class="cin-bg work-bg"></div>
+    <div class="cin-bokeh">
+      <div class="bokeh b1"></div>
+      <div class="bokeh b5"></div>
+      <div class="bokeh b7"></div>
+    </div>
+    <div class="cin-overlay cin-overlay-light"></div>
+    <div class="cin-content">
+      <p class="eyebrow reveal">Portfolio</p>
+      <h2 class="cin-heading reveal">Our Work <span id="work-count-badge" class="badge-count"></span></h2>
+      <p class="cin-sub reveal">Real projects, real results — built with passion.</p>
+      <div class="work-grid" id="work-cards"></div>
+    </div>
+  </section>
+
+  <section class="cin-section testi-section" id="testimonials">
+    <div class="cin-bg testi-bg"></div>
+    <div class="cin-bokeh">
+      <div class="bokeh b2"></div>
+      <div class="bokeh b3"></div>
+      <div class="bokeh b6"></div>
+    </div>
+    <div class="cin-overlay"></div>
+    <div class="cin-content">
+      <p class="eyebrow reveal">Reviews</p>
+      <h2 class="cin-heading reveal">You imagine it.<br><em>We shape it.</em></h2>
+      <p class="cin-sub reveal">Words from people who trusted us with their vision.</p>
+      <div class="testi-grid">
+        <div class="testi-card reveal">
+          <div class="testi-quote">"</div>
+          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p>"Professional design and smooth delivery. They understood exactly what I needed."</p>
+          <div class="testi-author">
+            <div class="avatar">DP</div>
+            <div>
+              <strong>Darpan Patil</strong>
+              <span>Darpan Enterprises</span>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card reveal">
+          <div class="testi-quote">"</div>
+          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p>"Modern, animated and high quality. My website looks incredible — clients keep complimenting it."</p>
+          <div class="testi-author">
+            <div class="avatar">DC</div>
+            <div>
+              <strong>Dimpal Chaudhari</strong>
+              <span>Business Owner</span>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card reveal">
+          <div class="testi-quote">"</div>
+          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p>"They brought my idea to life beautifully. The card was exactly what I envisioned — and even better."</p>
+          <div class="testi-author">
+            <div class="avatar">VC</div>
+            <div>
+              <strong>Vrundhavan Collection</strong>
+              <span>Saree Business</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cin-section contact-section" id="contact">
+    <div class="cin-bg contact-bg"></div>
+    <div class="cin-bokeh">
+      <div class="bokeh b1"></div>
+      <div class="bokeh b4"></div>
+      <div class="bokeh b7"></div>
+    </div>
+    <div class="cin-overlay"></div>
+    <div class="cin-content">
+      <p class="eyebrow reveal">Let's Talk</p>
+      <h2 class="cin-heading reveal">Get In Touch</h2>
+      <p class="cin-sub reveal">Reach us directly — we respond fast.</p>
+      <div class="contact-pyramid">
+        <div class="contact-top">
+          <div class="contact-card reveal">
+            <h3>Supriti Patil</h3>
+            <p>+91 7768989575</p>
+            <a href="https://wa.me/917768989575" target="_blank" class="wa-btn">💬 WhatsApp</a>
+          </div>
+        </div>
+        <div class="contact-bottom">
+          <div class="contact-card reveal">
+            <h3>Shaantanu Varade</h3>
+            <p>+91 9322503616</p>
+            <a href="https://wa.me/919322503616" target="_blank" class="wa-btn">💬 WhatsApp</a>
+          </div>
+          <div class="contact-card reveal">
+            <h3>Rudresh Borole</h3>
+            <p>+91 8261836521</p>
+            <a href="https://wa.me/918261836521" target="_blank" class="wa-btn">💬 WhatsApp</a>
+          </div>
+        </div>
+      </div>
+      <div class="contact-links reveal">
+        <p><strong>Email:</strong> <a href="mailto:wevion.0103@gmail.com">wevion.0103@gmail.com</a></p>
+        <p><strong>Instagram:</strong> <a href="https://instagram.com/wevion.0103" target="_blank">@wevion.0103</a></p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">Wevion</div>
+      <p>You Think, We Develop — Modern Digital Studio</p>
+      <div class="footer-links">
+        <a href="#services">Services</a><span>·</span>
+        <a href="#work">Work</a><span>·</span>
+        <a href="#contact">Contact</a><span>·</span>
+        <a href="admin.html">Admin</a>
+      </div>
+      <p class="footer-copy">© 2026 Wevion. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
 </body>
 </html>

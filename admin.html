@@ -1,683 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Wevion Admin</title>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
-      --pu: #7c3aed;
-      --vi: #a78bfa;
-      --cy: #22d3ee;
-      --bg: #07070e;
-      --border: rgba(124, 58, 237, 0.2);
-      --sub: #8888bb;
-      --r: 16px;
+      --pu: #7c3aed; --vi: #a78bfa; --cy: #22d3ee;
+      --bg: #07070e; --border: rgba(124,58,237,0.2); --sub: #8888bb; --r: 16px;
     }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: #fff;
-      min-height: 100vh;
-    }
-
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: #fff; min-height: 100vh; }
     body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(124, 58, 237, 0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(124, 58, 237, 0.04) 1px, transparent 1px);
-      background-size: 50px 50px;
-      pointer-events: none;
-      z-index: 0;
+      content: ''; position: fixed; inset: 0;
+      background-image: linear-gradient(rgba(124,58,237,0.04) 1px,transparent 1px), linear-gradient(90deg,rgba(124,58,237,0.04) 1px,transparent 1px);
+      background-size: 50px 50px; pointer-events: none; z-index: 0;
     }
-
-    input,
-    select {
-      width: 100%;
-      padding: 13px 16px;
-      margin: 7px 0;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: rgba(124, 58, 237, 0.06);
-      color: #fff;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.92rem;
-      outline: none;
+    input, select, textarea {
+      width: 100%; padding: 13px 16px; margin: 7px 0;
+      border-radius: 10px; border: 1px solid var(--border);
+      background: rgba(124,58,237,0.06); color: #fff;
+      font-family: 'Inter', sans-serif; font-size: 0.92rem; outline: none;
       transition: border-color 0.3s, box-shadow 0.3s;
     }
-
-    input:focus,
-    select:focus {
-      border-color: rgba(124, 58, 237, 0.6);
-      box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
-    }
-
-    input::placeholder {
-      color: #444466;
-    }
-
-    select option {
-      background: #12121e;
-      color: #fff;
-    }
-
+    input:focus, select:focus { border-color: rgba(124,58,237,0.6); box-shadow: 0 0 0 3px rgba(124,58,237,0.1); }
+    input::placeholder { color: #444466; }
     .btn-primary {
-      width: 100%;
-      padding: 13px;
-      margin-top: 12px;
-      border-radius: 10px;
-      border: none;
-      font-family: 'Inter', sans-serif;
-      font-weight: 600;
-      cursor: pointer;
-      font-size: 0.95rem;
-      background: linear-gradient(90deg, var(--pu), var(--vi));
-      color: #fff;
-      box-shadow: 0 4px 20px rgba(124, 58, 237, 0.35);
-      transition: all 0.3s;
+      width: 100%; padding: 13px; margin-top: 12px;
+      border-radius: 10px; border: none; font-family: 'Inter', sans-serif;
+      font-weight: 600; cursor: pointer; font-size: 0.95rem;
+      background: linear-gradient(90deg, var(--pu), var(--vi)); color: #fff;
+      box-shadow: 0 4px 20px rgba(124,58,237,0.35); transition: all 0.3s;
     }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(124, 58, 237, 0.5);
-    }
-
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(124,58,237,0.5); }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
     #login-page {
-      position: fixed;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 10;
-      padding: 20px;
+      position: fixed; inset: 0; display: flex;
+      align-items: center; justify-content: center; z-index: 10; padding: 20px;
     }
-
     .login-box {
-      width: 100%;
-      max-width: 420px;
-      background: rgba(12, 12, 24, 0.95);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 48px 40px;
-      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
-      position: relative;
-      z-index: 1;
-      animation: boxIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      width: 100%; max-width: 420px; background: rgba(12,12,24,0.95);
+      border: 1px solid var(--border); border-radius: 24px; padding: 48px 40px;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.6); position: relative; z-index: 1;
+      animation: boxIn 0.6s cubic-bezier(0.34,1.56,0.64,1);
     }
-
-    @keyframes boxIn {
-      from {
-        opacity: 0;
-        transform: translateY(30px) scale(0.97);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
+    @keyframes boxIn { from { opacity:0; transform:translateY(30px) scale(0.97); } to { opacity:1; transform:translateY(0) scale(1); } }
     .back-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: var(--sub);
-      text-decoration: none;
-      font-size: 0.82rem;
-      font-weight: 600;
-      padding: 7px 16px;
-      border-radius: 50px;
-      border: 1px solid var(--border);
-      background: rgba(124, 58, 237, 0.06);
-      transition: all 0.3s;
-      margin-bottom: 24px;
+      display: inline-flex; align-items: center; gap: 6px; color: var(--sub);
+      text-decoration: none; font-size: 0.82rem; font-weight: 600;
+      padding: 7px 16px; border-radius: 50px; border: 1px solid var(--border);
+      background: rgba(124,58,237,0.06); transition: all 0.3s; margin-bottom: 24px;
     }
-
-    .back-btn:hover {
-      color: var(--vi);
-      border-color: rgba(124, 58, 237, 0.5);
-    }
-
+    .back-btn:hover { color: var(--vi); border-color: rgba(124,58,237,0.5); }
     .logo-text {
-      font-family: 'Syne', sans-serif;
-      font-size: 2rem;
-      font-weight: 800;
+      font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800;
       background: linear-gradient(90deg, var(--cy), var(--pu), var(--vi));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      margin-bottom: 6px;
+      -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 6px;
     }
-
-    .login-sub {
-      color: var(--sub);
-      font-size: 0.85rem;
-      margin-bottom: 28px;
-    }
-
-    #login-error {
-      color: #ff6b6b;
-      text-align: center;
-      font-size: 0.85rem;
-      min-height: 18px;
-      margin-top: 10px;
-    }
-
+    .login-sub { color: var(--sub); font-size: 0.85rem; margin-bottom: 28px; }
+    #login-error { color: #ff6b6b; text-align: center; font-size: 0.85rem; min-height: 18px; margin-top: 10px; }
     .spinner {
-      display: none;
-      width: 18px;
-      height: 18px;
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      border-top-color: #fff;
-      border-radius: 50%;
-      animation: spin 0.6s linear infinite;
-      margin: 8px auto 0;
+      display: none; width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: #fff; border-radius: 50%;
+      animation: spin 0.6s linear infinite; margin: 8px auto 0;
     }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    .forgot-link {
-      display: block;
-      text-align: center;
-      margin-top: 14px;
-      color: var(--sub);
-      font-size: 0.82rem;
-      cursor: pointer;
-      transition: color 0.3s;
-    }
-
-    .forgot-link:hover {
-      color: var(--vi);
-    }
-
-    #dashboard-page {
-      display: none;
-      min-height: 100vh;
-      padding: 0 0 80px;
-    }
-
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .forgot-link { display: block; text-align: center; margin-top: 14px; color: var(--sub); font-size: 0.82rem; cursor: pointer; transition: color 0.3s; }
+    .forgot-link:hover { color: var(--vi); }
+    #dashboard-page { display: none; min-height: 100vh; padding: 0 0 80px; }
     .dash-header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(5, 5, 16, 0.96);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 32px;
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(5,5,16,0.96); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border); display: flex;
+      align-items: center; justify-content: space-between; padding: 16px 32px;
     }
-
     .dash-logo {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.4rem;
-      font-weight: 800;
+      font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800;
       background: linear-gradient(90deg, var(--cy), var(--pu));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      cursor: pointer;
-      user-select: none;
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      cursor: pointer; user-select: none;
     }
-
-    .dash-actions {
-      display: flex;
-      gap: 10px;
-    }
-
-    .btn-sm {
-      padding: 8px 18px;
-      border-radius: 50px;
-      border: none;
-      font-family: 'Inter', sans-serif;
-      font-weight: 600;
-      font-size: 0.82rem;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .btn-back {
-      background: rgba(124, 58, 237, 0.1);
-      border: 1px solid var(--border);
-      color: var(--vi);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .btn-back:hover {
-      background: rgba(124, 58, 237, 0.2);
-      border-color: var(--pu);
-    }
-
-    .btn-logout {
-      background: rgba(231, 76, 60, 0.1);
-      border: 1px solid rgba(231, 76, 60, 0.25);
-      color: #e74c3c;
-    }
-
-    .btn-logout:hover {
-      background: rgba(231, 76, 60, 0.25);
-    }
-
-    .dash-body {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 40px 24px;
-    }
-
-    .tabs {
-      display: flex;
-      gap: 6px;
-      margin-bottom: 32px;
-      background: rgba(124, 58, 237, 0.06);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 6px;
-    }
-
-    .tab-btn {
-      flex: 1;
-      padding: 11px;
-      border-radius: 8px;
-      border: none;
-      font-family: 'Syne', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.3s;
-      background: transparent;
-      color: var(--sub);
-    }
-
-    .tab-btn.active {
-      background: linear-gradient(90deg, var(--pu), var(--vi));
-      color: #fff;
-      box-shadow: 0 4px 16px rgba(124, 58, 237, 0.4);
-    }
-
-    .tab-btn:hover:not(.active) {
-      color: var(--vi);
-    }
-
-    .tab-panel {
-      display: none;
-    }
-
-    .tab-panel.active {
-      display: block;
-    }
-
-    .add-section {
-      background: rgba(10, 10, 22, 0.9);
-      border: 1px solid var(--border);
-      border-radius: var(--r);
-      padding: 36px;
-      margin-bottom: 40px;
-    }
-
-    .add-section h2 {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: 24px;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .form-grid input,
-    .form-grid select {
-      margin: 0;
-    }
-
-    .form-full {
-      grid-column: 1 / -1;
-    }
-
-    #add-msg-work,
-    #add-msg-service {
-      font-size: 0.85rem;
-      min-height: 18px;
-      margin-top: 10px;
-      text-align: center;
-    }
-
-    .section-badge {
-      font-size: 0.75rem;
-      padding: 4px 12px;
-      border-radius: 20px;
-      background: rgba(34, 211, 238, 0.12);
-      border: 1px solid rgba(34, 211, 238, 0.25);
-      color: var(--cy);
-      font-family: 'Inter', sans-serif;
-    }
-
-    .img-upload-box {
-      background: rgba(124, 58, 237, 0.04);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px;
-    }
-
-    .upload-label {
-      font-size: 0.82rem;
-      color: var(--sub);
-      margin-bottom: 10px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      display: block;
-    }
-
-    .upload-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .file-upload-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 20px;
-      border-radius: 8px;
-      background: rgba(124, 58, 237, 0.12);
-      border: 1px solid rgba(124, 58, 237, 0.3);
-      color: var(--vi);
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s;
-      white-space: nowrap;
-    }
-
-    .file-upload-btn:hover {
-      background: rgba(124, 58, 237, 0.22);
-    }
-
-    .file-upload-btn input[type="file"] {
-      display: none;
-    }
-
-    .upload-or {
-      color: var(--sub);
-      font-size: 0.8rem;
-      flex-shrink: 0;
-    }
-
-    .upload-row input[type="text"] {
-      flex: 1;
-      min-width: 180px;
-      margin: 0;
-    }
-
-    .projects-section h2 {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: 20px;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .proj-count {
-      font-size: 0.75rem;
-      background: rgba(124, 58, 237, 0.12);
-      border: 1px solid rgba(124, 58, 237, 0.25);
-      color: var(--vi);
-      padding: 3px 12px;
-      border-radius: 20px;
-      font-weight: 600;
-    }
-
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-      gap: 20px;
-    }
-
-    .proj-card {
-      background: rgba(14, 14, 26, 0.97);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      overflow: hidden;
-      transition: all 0.3s;
-    }
-
-    .proj-card:hover {
-      border-color: rgba(124, 58, 237, 0.4);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-      transform: translateY(-4px);
-    }
-
-    .proj-img {
-      width: 100%;
-      height: 150px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .proj-img-placeholder {
-      width: 100%;
-      height: 150px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(34, 211, 238, 0.05));
-      font-size: 2.5rem;
-    }
-
-    .proj-body {
-      padding: 16px;
-    }
-
-    .proj-title {
-      font-family: 'Syne', sans-serif;
-      font-size: 0.98rem;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 5px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .proj-desc {
-      color: var(--sub);
-      font-size: 0.78rem;
-      line-height: 1.55;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      margin-bottom: 12px;
-    }
-
-    .proj-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: 10px;
-      border-top: 1px solid rgba(124, 58, 237, 0.1);
-    }
-
-    .proj-tag {
-      font-size: 0.66rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--vi);
-      padding: 3px 10px;
-      border-radius: 20px;
-      background: rgba(124, 58, 237, 0.12);
-      border: 1px solid rgba(124, 58, 237, 0.2);
-    }
-
-    .proj-link {
-      font-size: 0.74rem;
-      color: var(--cy);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .proj-link:hover {
-      color: #fff;
-    }
-
-    .btn-delete {
-      background: rgba(231, 76, 60, 0.1);
-      color: #e74c3c;
-      border: 1px solid rgba(231, 76, 60, 0.25);
-      padding: 5px 12px;
-      border-radius: 7px;
-      font-size: 0.76rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-      font-family: 'Inter', sans-serif;
-    }
-
-    .btn-delete:hover {
-      background: rgba(231, 76, 60, 0.28);
-      border-color: #e74c3c;
-    }
-
-    .empty-state {
-      text-align: center;
-      padding: 50px 20px;
-      color: var(--sub);
-      grid-column: 1 / -1;
-    }
-
-    .empty-icon {
-      font-size: 2.5rem;
-      display: block;
-      margin-bottom: 10px;
-      opacity: 0.4;
-    }
-
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.82);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      backdrop-filter: blur(10px);
-      padding: 20px;
-    }
-
-    .modal-box {
-      background: rgba(12, 12, 24, 0.98);
-      border: 1px solid rgba(124, 58, 237, 0.35);
-      border-radius: 20px;
-      padding: 40px;
-      width: 100%;
-      max-width: 440px;
-      position: relative;
-      animation: boxIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .modal-title {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 6px;
-    }
-
-    .modal-sub {
-      color: var(--sub);
-      font-size: 0.83rem;
-      margin-bottom: 24px;
-      line-height: 1.6;
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      background: none;
-      border: none;
-      color: rgba(255, 255, 255, 0.3);
-      font-size: 1.1rem;
-      cursor: pointer;
-      transition: color 0.2s;
-    }
-
-    .modal-close:hover {
-      color: #fff;
-    }
-
-    .modal-msg {
-      text-align: center;
-      font-size: 0.83rem;
-      min-height: 18px;
-      margin-top: 10px;
-    }
-
-    .modal-hint {
-      color: rgba(255, 255, 255, 0.18);
-      font-size: 0.7rem;
-      margin-top: 16px;
-      text-align: center;
-      line-height: 1.6;
-    }
-
-    .text-link {
-      color: var(--vi);
-      background: none;
-      border: none;
-      font-size: 0.82rem;
-      cursor: pointer;
-      padding: 0;
-      text-decoration: underline;
-      display: block;
-      text-align: center;
-      margin-top: 12px;
-      transition: color 0.2s;
-    }
-
-    .text-link:hover {
-      color: var(--cy);
-    }
-
-    .hidden {
-      display: none !important;
-    }
+    .dash-actions { display: flex; gap: 10px; }
+    .btn-sm { padding: 8px 18px; border-radius: 50px; border: none; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.82rem; cursor: pointer; transition: all 0.3s; }
+    .btn-back { background: rgba(124,58,237,0.1); border: 1px solid var(--border); color: var(--vi); text-decoration: none; display: inline-flex; align-items: center; gap: 5px; }
+    .btn-back:hover { background: rgba(124,58,237,0.2); border-color: var(--pu); }
+    .btn-logout { background: rgba(231,76,60,0.1); border: 1px solid rgba(231,76,60,0.25); color: #e74c3c; }
+    .btn-logout:hover { background: rgba(231,76,60,0.25); }
+    .dash-body { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
+    .tabs { display: flex; gap: 6px; margin-bottom: 32px; background: rgba(124,58,237,0.06); border: 1px solid var(--border); border-radius: 12px; padding: 6px; }
+    .tab-btn { flex: 1; padding: 11px; border-radius: 8px; border: none; font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; cursor: pointer; transition: all 0.3s; background: transparent; color: var(--sub); }
+    .tab-btn.active { background: linear-gradient(90deg, var(--pu), var(--vi)); color: #fff; box-shadow: 0 4px 16px rgba(124,58,237,0.4); }
+    .tab-btn:hover:not(.active) { color: var(--vi); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .add-section { background: rgba(10,10,22,0.9); border: 1px solid var(--border); border-radius: var(--r); padding: 36px; margin-bottom: 40px; }
+    .add-section h2 { font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 24px; color: #fff; display: flex; align-items: center; gap: 10px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .form-grid input, .form-grid select { margin: 0; }
+    .form-full { grid-column: 1 / -1; }
+    #add-msg-work, #add-msg-service { font-size: 0.85rem; min-height: 18px; margin-top: 10px; text-align: center; }
+    .section-badge { font-size: 0.75rem; padding: 4px 12px; border-radius: 20px; background: rgba(34,211,238,0.12); border: 1px solid rgba(34,211,238,0.25); color: var(--cy); font-family: 'Inter', sans-serif; }
+    .img-upload-box { background: rgba(124,58,237,0.04); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+    .upload-label { font-size: 0.82rem; color: var(--sub); margin-bottom: 10px; font-weight: 600; letter-spacing: 0.5px; display: block; }
+    .upload-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .file-upload-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 8px; background: rgba(124,58,237,0.12); border: 1px solid rgba(124,58,237,0.3); color: var(--vi); font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.3s; white-space: nowrap; }
+    .file-upload-btn:hover { background: rgba(124,58,237,0.22); }
+    .file-upload-btn input[type="file"] { display: none; }
+    .upload-or { color: var(--sub); font-size: 0.8rem; flex-shrink: 0; }
+    .upload-row input[type="text"] { flex: 1; min-width: 180px; margin: 0; }
+    .projects-section h2 { font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 20px; color: #fff; display: flex; align-items: center; gap: 10px; }
+    .proj-count { font-size: 0.75rem; background: rgba(124,58,237,0.12); border: 1px solid rgba(124,58,237,0.25); color: var(--vi); padding: 3px 12px; border-radius: 20px; font-weight: 600; }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px,1fr)); gap: 20px; }
+    .proj-card { background: rgba(14,14,26,0.97); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; transition: all 0.3s; }
+    .proj-card:hover { border-color: rgba(124,58,237,0.4); box-shadow: 0 20px 50px rgba(0,0,0,0.4); transform: translateY(-4px); }
+    .proj-img { width: 100%; height: 150px; object-fit: cover; display: block; }
+    .proj-img-placeholder { width: 100%; height: 150px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg,rgba(124,58,237,0.1),rgba(34,211,238,0.05)); font-size: 2.5rem; }
+    .proj-body { padding: 16px; }
+    .proj-title { font-family: 'Syne', sans-serif; font-size: 0.98rem; font-weight: 700; color: #fff; margin-bottom: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .proj-desc { color: var(--sub); font-size: 0.78rem; line-height: 1.55; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 12px; }
+    .proj-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 10px; border-top: 1px solid rgba(124,58,237,0.1); }
+    .proj-tag { font-size: 0.66rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--vi); padding: 3px 10px; border-radius: 20px; background: rgba(124,58,237,0.12); border: 1px solid rgba(124,58,237,0.2); }
+    .proj-link { font-size: 0.74rem; color: var(--cy); text-decoration: none; transition: color 0.2s; }
+    .proj-link:hover { color: #fff; }
+    .btn-delete { background: rgba(231,76,60,0.1); color: #e74c3c; border: 1px solid rgba(231,76,60,0.25); padding: 5px 12px; border-radius: 7px; font-size: 0.76rem; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: 'Inter', sans-serif; }
+    .btn-delete:hover { background: rgba(231,76,60,0.28); border-color: #e74c3c; }
+    .empty-state { text-align: center; padding: 50px 20px; color: var(--sub); grid-column: 1 / -1; }
+    .empty-icon { font-size: 2.5rem; display: block; margin-bottom: 10px; opacity: 0.4; }
+    .modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.82); display: flex; align-items: center; justify-content: center; z-index: 9999; backdrop-filter: blur(10px); padding: 20px; }
+    .modal-box { background: rgba(12,12,24,0.98); border: 1px solid rgba(124,58,237,0.35); border-radius: 20px; padding: 40px; width: 100%; max-width: 440px; position: relative; animation: boxIn 0.4s cubic-bezier(0.34,1.56,0.64,1); }
+    .modal-title { font-family: 'Syne', sans-serif; font-size: 1.25rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .modal-sub { color: var(--sub); font-size: 0.83rem; margin-bottom: 24px; line-height: 1.6; }
+    .modal-close { position: absolute; top: 16px; right: 16px; background: none; border: none; color: rgba(255,255,255,0.3); font-size: 1.1rem; cursor: pointer; transition: color 0.2s; }
+    .modal-close:hover { color: #fff; }
+    .modal-msg { text-align: center; font-size: 0.83rem; min-height: 18px; margin-top: 10px; }
+    .modal-hint { color: rgba(255,255,255,0.18); font-size: 0.7rem; margin-top: 16px; text-align: center; line-height: 1.6; }
+    .text-link { color: var(--vi); background: none; border: none; font-size: 0.82rem; cursor: pointer; padding: 0; text-decoration: underline; display: block; text-align: center; margin-top: 12px; transition: color 0.2s; }
+    .text-link:hover { color: var(--cy); }
+    .hidden { display: none !important; }
+    .firebase-status { background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.2); border-radius: 8px; padding: 8px 14px; font-size: 0.78rem; color: #22c55e; display: flex; align-items: center; gap: 6px; margin-bottom: 20px; }
+    .firebase-status.error { background: rgba(231,76,60,0.08); border-color: rgba(231,76,60,0.2); color: #e74c3c; }
   </style>
 </head>
-
 <body>
+
   <div id="login-page">
     <div class="login-box">
       <a href="index.html" class="back-btn">← Back to Website</a>
@@ -691,6 +157,7 @@
       <span class="forgot-link" onclick="showForgotPw()">Forgot password?</span>
     </div>
   </div>
+
   <div id="dashboard-page">
     <header class="dash-header">
       <div class="dash-logo" id="dash-logo">Wevion Admin</div>
@@ -700,10 +167,12 @@
       </div>
     </header>
     <div class="dash-body">
+      <div id="fb-status"></div>
       <div class="tabs">
         <button class="tab-btn active" onclick="switchTab('work')">🗂 Our Work</button>
         <button class="tab-btn" onclick="switchTab('services')">⚙ Our Services</button>
       </div>
+
       <div id="tab-work" class="tab-panel active">
         <div class="add-section">
           <h2>➕ Add Project <span class="section-badge">Our Work</span></h2>
@@ -715,25 +184,21 @@
               <div class="upload-row">
                 <label class="file-upload-btn">
                   📁 Upload Image
-                  <input type="file" id="w-img-file" accept="image/*"
-                    onchange="previewImg(this,'w-preview','w-img-data')">
+                  <input type="file" id="w-img-file" accept="image/*" onchange="previewImg(this,'w-preview','w-img-data')">
                 </label>
                 <span class="upload-or">or</span>
                 <input type="text" id="w-img-url" placeholder="Paste image URL (https://...)">
               </div>
               <div id="w-preview" style="display:none;align-items:center;gap:10px;margin-top:12px;">
-                <img id="w-preview-img" src=""
-                  style="max-height:100px;border-radius:8px;border:1px solid var(--border);">
-                <button onclick="clearImg('w-img-file','w-img-url','w-preview','w-img-data')"
-                  style="background:rgba(231,76,60,0.15);color:#e74c3c;border:1px solid rgba(231,76,60,0.3);padding:4px 10px;border-radius:6px;cursor:pointer;font-size:0.78rem;">✕</button>
+                <img id="w-preview-img" src="" style="max-height:100px;border-radius:8px;border:1px solid var(--border);">
+                <button onclick="clearImg('w-img-file','w-img-url','w-preview','w-img-data')" style="background:rgba(231,76,60,0.15);color:#e74c3c;border:1px solid rgba(231,76,60,0.3);padding:4px 10px;border-radius:6px;cursor:pointer;font-size:0.78rem;">✕</button>
               </div>
             </div>
             <input type="text" id="w-link" placeholder="Live URL (optional)">
             <input type="text" id="w-tag" placeholder="Tag (e.g. Web Dev, Branding)">
           </div>
           <input type="hidden" id="w-img-data" value="">
-          <button class="btn-primary" onclick="addWork()" style="max-width:220px;margin-top:16px;">Add to Our Work
-            →</button>
+          <button class="btn-primary" onclick="addWork()" style="max-width:220px;margin-top:16px;" id="add-work-btn">Add to Our Work →</button>
           <p id="add-msg-work"></p>
         </div>
         <div class="projects-section">
@@ -741,6 +206,7 @@
           <div class="projects-grid" id="work-list"></div>
         </div>
       </div>
+
       <div id="tab-services" class="tab-panel">
         <div class="add-section">
           <h2>➕ Add Service Card <span class="section-badge">Services</span></h2>
@@ -752,25 +218,21 @@
               <div class="upload-row">
                 <label class="file-upload-btn">
                   📁 Upload Image
-                  <input type="file" id="s-img-file" accept="image/*"
-                    onchange="previewImg(this,'s-preview','s-img-data')">
+                  <input type="file" id="s-img-file" accept="image/*" onchange="previewImg(this,'s-preview','s-img-data')">
                 </label>
                 <span class="upload-or">or</span>
                 <input type="text" id="s-img-url" placeholder="Paste image URL (https://...)">
               </div>
               <div id="s-preview" style="display:none;align-items:center;gap:10px;margin-top:12px;">
-                <img id="s-preview-img" src=""
-                  style="max-height:100px;border-radius:8px;border:1px solid var(--border);">
-                <button onclick="clearImg('s-img-file','s-img-url','s-preview','s-img-data')"
-                  style="background:rgba(231,76,60,0.15);color:#e74c3c;border:1px solid rgba(231,76,60,0.3);padding:4px 10px;border-radius:6px;cursor:pointer;font-size:0.78rem;">✕</button>
+                <img id="s-preview-img" src="" style="max-height:100px;border-radius:8px;border:1px solid var(--border);">
+                <button onclick="clearImg('s-img-file','s-img-url','s-preview','s-img-data')" style="background:rgba(231,76,60,0.15);color:#e74c3c;border:1px solid rgba(231,76,60,0.3);padding:4px 10px;border-radius:6px;cursor:pointer;font-size:0.78rem;">✕</button>
               </div>
             </div>
             <input type="text" id="s-icon" placeholder="Emoji Icon (e.g. 🌐 ✏️ 💳)">
             <input type="text" id="s-tag" placeholder="Tag (e.g. Popular, Creative)">
           </div>
           <input type="hidden" id="s-img-data" value="">
-          <button class="btn-primary" onclick="addService()" style="max-width:240px;margin-top:16px;">Add to Services
-            →</button>
+          <button class="btn-primary" onclick="addService()" style="max-width:240px;margin-top:16px;" id="add-service-btn">Add to Services →</button>
           <p id="add-msg-service"></p>
         </div>
         <div class="projects-section">
@@ -780,172 +242,277 @@
       </div>
     </div>
   </div>
-  <script>
-    const ADMIN_ID_HASH = "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918";
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, orderBy, query, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA-cmSVB4N0GEGeYYm9sg9ouxYDX6Lr-hk",
+      authDomain: "wevion.firebaseapp.com",
+      projectId: "wevion",
+      storageBucket: "wevion.firebasestorage.app",
+      messagingSenderId: "908564339000",
+      appId: "1:908564339000:web:a48bcd808c078f5ee409cd"
+    };
+
+    const app  = initializeApp(firebaseConfig);
+    const db   = getFirestore(app);
+    const auth = getAuth(app);
+
+    const ADMIN_ID_HASH   = "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918";
     const ADMIN_PASS_HASH = "030b942e8a8d3623f37ddf9fa8837cd01a3817ecd69aa3b05d3e8e2f65882659";
 
-    function getIdHash() { return localStorage.getItem("wevionAdminIdHash") || ADMIN_ID_HASH; }
+    function getIdHash()   { return localStorage.getItem("wevionAdminIdHash")   || ADMIN_ID_HASH; }
     function getPassHash() { return localStorage.getItem("wevionAdminPassHash") || ADMIN_PASS_HASH; }
+
     async function sha256(str) {
       const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
-      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
+      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,"0")).join("");
     }
-    async function login() {
-      const idVal = document.getElementById("admin-id").value.trim();
-      const passVal = document.getElementById("admin-pass").value;
-      const errEl = document.getElementById("login-error");
-      const btnEl = document.getElementById("login-btn");
-      const spinEl = document.getElementById("login-spinner");
 
-      btnEl.style.display = "none";
+    window.login = async function () {
+      const idVal   = document.getElementById("admin-id").value.trim();
+      const passVal = document.getElementById("admin-pass").value;
+      const errEl   = document.getElementById("login-error");
+      const btnEl   = document.getElementById("login-btn");
+      const spinEl  = document.getElementById("login-spinner");
+
+      btnEl.style.display  = "none";
       spinEl.style.display = "block";
-      errEl.textContent = "";
+      errEl.textContent    = "";
 
       const [idHash, passHash] = await Promise.all([sha256(idVal), sha256(passVal)]);
 
-      btnEl.style.display = "block";
-      spinEl.style.display = "none";
-
       if (idHash === getIdHash() && passHash === getPassHash()) {
-        document.getElementById("login-page").classList.add("hidden");
-        document.getElementById("dashboard-page").style.display = "block";
-        loadWork();
-        loadServices();
+        try {
+          await signInAnonymously(auth);
+          document.getElementById("login-page").classList.add("hidden");
+          document.getElementById("dashboard-page").style.display = "block";
+          document.getElementById("fb-status").innerHTML = `<div class="firebase-status">🔥 Connected to Firebase — data syncs everywhere</div>`;
+          loadWork();
+          loadServices();
+        } catch (err) {
+          btnEl.style.display  = "block";
+          spinEl.style.display = "none";
+          errEl.textContent = "Firebase connection failed. Check your internet.";
+        }
       } else {
+        btnEl.style.display  = "block";
+        spinEl.style.display = "none";
         errEl.textContent = "Wrong ID or Password";
         document.getElementById("admin-pass").value = "";
       }
-    }
-    document.addEventListener("keydown", e => { if (e.key === "Enter") login(); });
+    };
 
-    function switchTab(name) {
-      document.querySelectorAll(".tab-btn").forEach((b, i) => b.classList.toggle("active", ["work", "services"][i] === name));
-      document.getElementById("tab-work").classList.toggle("active", name === "work");
+    document.addEventListener("keydown", e => { if (e.key === "Enter") window.login(); });
+
+    window.switchTab = function (name) {
+      document.querySelectorAll(".tab-btn").forEach((b,i) => b.classList.toggle("active", ["work","services"][i] === name));
+      document.getElementById("tab-work").classList.toggle("active",     name === "work");
       document.getElementById("tab-services").classList.toggle("active", name === "services");
-    }
-    function previewImg(input, previewId, dataId) {
+    };
+
+    window.previewImg = function (input, previewId, dataId) {
       const file = input.files[0];
       if (!file) return;
+
+      if (file.size > 800 * 1024) {
+        compressImage(file, (compressed) => {
+          document.getElementById(dataId).value = compressed;
+          document.getElementById(previewId + "-img").src = compressed;
+          document.getElementById(previewId).style.display = "flex";
+        });
+      } else {
+        const reader = new FileReader();
+        reader.onload = e => {
+          document.getElementById(dataId).value = e.target.result;
+          document.getElementById(previewId + "-img").src = e.target.result;
+          document.getElementById(previewId).style.display = "flex";
+        };
+        reader.readAsDataURL(file);
+      }
+    };
+
+    function compressImage(file, callback) {
       const reader = new FileReader();
       reader.onload = e => {
-        document.getElementById(dataId).value = e.target.result;
-        document.getElementById(previewId + "-img").src = e.target.result;
-        document.getElementById(previewId).style.display = "flex";
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          const MAX = 800;
+          let w = img.width, h = img.height;
+          if (w > MAX) { h = h * MAX / w; w = MAX; }
+          canvas.width = w; canvas.height = h;
+          canvas.getContext("2d").drawImage(img, 0, 0, w, h);
+          callback(canvas.toDataURL("image/jpeg", 0.75));
+        };
+        img.src = e.target.result;
       };
       reader.readAsDataURL(file);
     }
-    function clearImg(fileId, urlId, previewId, dataId) {
-      document.getElementById(fileId).value = "";
-      document.getElementById(urlId).value = "";
-      document.getElementById(dataId).value = "";
+
+    window.clearImg = function (fileId, urlId, previewId, dataId) {
+      document.getElementById(fileId).value  = "";
+      document.getElementById(urlId).value   = "";
+      document.getElementById(dataId).value  = "";
       document.getElementById(previewId).style.display = "none";
-    }
+    };
+
     function getImg(dataId, urlId) {
       return document.getElementById(dataId).value || document.getElementById(urlId).value.trim() || "";
     }
-    function addWork() {
+
+    window.addWork = async function () {
       const title = document.getElementById("w-title").value.trim();
-      const desc = document.getElementById("w-desc").value.trim();
-      const img = getImg("w-img-data", "w-img-url");
-      const link = document.getElementById("w-link").value.trim();
-      const tag = document.getElementById("w-tag").value.trim() || "Project";
+      const desc  = document.getElementById("w-desc").value.trim();
+      const img   = getImg("w-img-data","w-img-url");
+      const link  = document.getElementById("w-link").value.trim();
+      const tag   = document.getElementById("w-tag").value.trim() || "Project";
       const msgEl = document.getElementById("add-msg-work");
+      const btnEl = document.getElementById("add-work-btn");
 
-      if (!title || !desc) { msgEl.style.color = "#ff6b6b"; msgEl.textContent = "Title and Description required."; return; }
-      const projects = JSON.parse(localStorage.getItem("wevionProjects") || "[]");
-      projects.unshift({ title, desc, img, link, tag });
-      localStorage.setItem("wevionProjects", JSON.stringify(projects));
+      if (!title || !desc) { msgEl.style.color="#ff6b6b"; msgEl.textContent="Title and Description required."; return; }
 
-      msgEl.style.color = "#22c55e"; msgEl.textContent = "✓ Project added!";
-      ["w-title", "w-desc", "w-img-url", "w-link", "w-tag"].forEach(id => document.getElementById(id).value = "");
-      clearImg("w-img-file", "w-img-url", "w-preview", "w-img-data");
-      setTimeout(() => msgEl.textContent = "", 3000);
-      loadWork();
-    }
-    function deleteWork(i) {
-      if (!confirm("Delete this project?")) return;
-      const p = JSON.parse(localStorage.getItem("wevionProjects") || "[]");
-      p.splice(i, 1);
-      localStorage.setItem("wevionProjects", JSON.stringify(p));
-      loadWork();
-    }
-    function loadWork() {
-      const listEl = document.getElementById("work-list");
+      btnEl.disabled = true;
+      btnEl.textContent = "Saving...";
+
+      try {
+        await addDoc(collection(db, "wevionProjects"), { title, desc, img, link, tag, createdAt: serverTimestamp() });
+        msgEl.style.color="#22c55e"; msgEl.textContent="✓ Project saved to Firebase!";
+        ["w-title","w-desc","w-img-url","w-link","w-tag"].forEach(id => document.getElementById(id).value="");
+        window.clearImg("w-img-file","w-img-url","w-preview","w-img-data");
+        setTimeout(() => msgEl.textContent="", 3000);
+        loadWork();
+      } catch (err) {
+        msgEl.style.color="#ff6b6b"; msgEl.textContent="Save failed: " + err.message;
+      } finally {
+        btnEl.disabled = false;
+        btnEl.textContent = "Add to Our Work →";
+      }
+    };
+
+    window.deleteWork = async function (id) {
+      if (!confirm("Delete this project from Firebase?")) return;
+      try {
+        await deleteDoc(doc(db, "wevionProjects", id));
+        loadWork();
+      } catch (err) {
+        alert("Delete failed: " + err.message);
+      }
+    };
+
+    async function loadWork() {
+      const listEl  = document.getElementById("work-list");
       const countEl = document.getElementById("work-count");
-      const p = JSON.parse(localStorage.getItem("wevionProjects") || "[]");
-      countEl.textContent = p.length;
+      listEl.innerHTML = `<div class="empty-state"><span class="empty-icon">⏳</span>Loading...</div>`;
 
-      if (!p.length) { listEl.innerHTML = `<div class="empty-state"><span class="empty-icon">📂</span>No projects yet.</div>`; return; }
-      listEl.innerHTML = p.map((pr, i) => `
-        <div class="proj-card">
-          ${pr.img ? `<img class="proj-img" src="${pr.img}" alt="${pr.title}" onerror="this.style.display='none'">` : ""}
-          <div class="proj-img-placeholder" style="${pr.img ? "display:none" : "display:flex"}">🖼️</div>
-          <div class="proj-body">
-            <div class="proj-title">${pr.title}</div>
-            <div class="proj-desc">${pr.desc}</div>
-            <div class="proj-footer">
-              <span class="proj-tag">${pr.tag || "Project"}</span>
-              <div style="display:flex;gap:8px;align-items:center;">
-                ${pr.link ? `<a class="proj-link" href="${pr.link}" target="_blank">↗ Visit</a>` : ""}
-                <button class="btn-delete" onclick="deleteWork(${i})">Delete</button>
+      try {
+        const snap     = await getDocs(query(collection(db,"wevionProjects"), orderBy("createdAt","desc")));
+        const projects = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        countEl.textContent = projects.length;
+
+        if (!projects.length) { listEl.innerHTML=`<div class="empty-state"><span class="empty-icon">📂</span>No projects yet.</div>`; return; }
+
+        listEl.innerHTML = projects.map(p => `
+          <div class="proj-card">
+            ${p.img ? `<img class="proj-img" src="${p.img}" alt="${p.title}" onerror="this.style.display='none'">` : ""}
+            <div class="proj-img-placeholder" style="${p.img?"display:none":"display:flex"}">🖼️</div>
+            <div class="proj-body">
+              <div class="proj-title">${p.title}</div>
+              <div class="proj-desc">${p.desc}</div>
+              <div class="proj-footer">
+                <span class="proj-tag">${p.tag||"Project"}</span>
+                <div style="display:flex;gap:8px;align-items:center;">
+                  ${p.link?`<a class="proj-link" href="${p.link}" target="_blank">↗ Visit</a>`:""}
+                  <button class="btn-delete" onclick="deleteWork('${p.id}')">Delete</button>
+                </div>
               </div>
             </div>
-          </div>
-        </div>`).join("");
+          </div>`).join("");
+      } catch (err) {
+        listEl.innerHTML = `<div class="empty-state"><span class="empty-icon">❌</span>Failed to load: ${err.message}</div>`;
+      }
     }
-    function addService() {
+
+    window.addService = async function () {
       const title = document.getElementById("s-title").value.trim();
-      const desc = document.getElementById("s-desc").value.trim();
-      const img = getImg("s-img-data", "s-img-url");
-      const icon = document.getElementById("s-icon").value.trim() || "⚡";
-      const tag = document.getElementById("s-tag").value.trim() || "Service";
+      const desc  = document.getElementById("s-desc").value.trim();
+      const img   = getImg("s-img-data","s-img-url");
+      const icon  = document.getElementById("s-icon").value.trim() || "⚡";
+      const tag   = document.getElementById("s-tag").value.trim() || "Service";
       const msgEl = document.getElementById("add-msg-service");
+      const btnEl = document.getElementById("add-service-btn");
 
-      if (!title || !desc) { msgEl.style.color = "#ff6b6b"; msgEl.textContent = "Title and Description required."; return; }
-      const services = JSON.parse(localStorage.getItem("wevionServices") || "[]");
-      services.push({ title, desc, img, icon, tag });
-      localStorage.setItem("wevionServices", JSON.stringify(services));
+      if (!title || !desc) { msgEl.style.color="#ff6b6b"; msgEl.textContent="Title and Description required."; return; }
 
-      msgEl.style.color = "#22c55e"; msgEl.textContent = "✓ Service card added!";
-      ["s-title", "s-desc", "s-img-url", "s-icon", "s-tag"].forEach(id => document.getElementById(id).value = "");
-      clearImg("s-img-file", "s-img-url", "s-preview", "s-img-data");
-      setTimeout(() => msgEl.textContent = "", 3000);
-      loadServices();
-    }
-    function deleteService(i) {
-      if (!confirm("Delete this service card?")) return;
-      const s = JSON.parse(localStorage.getItem("wevionServices") || "[]");
-      s.splice(i, 1);
-      localStorage.setItem("wevionServices", JSON.stringify(s));
-      loadServices();
-    }
-    function loadServices() {
-      const listEl = document.getElementById("service-list");
+      btnEl.disabled = true;
+      btnEl.textContent = "Saving...";
+
+      try {
+        await addDoc(collection(db, "wevionServices"), { title, desc, img, icon, tag, createdAt: serverTimestamp() });
+        msgEl.style.color="#22c55e"; msgEl.textContent="✓ Service saved to Firebase!";
+        ["s-title","s-desc","s-img-url","s-icon","s-tag"].forEach(id => document.getElementById(id).value="");
+        window.clearImg("s-img-file","s-img-url","s-preview","s-img-data");
+        setTimeout(() => msgEl.textContent="", 3000);
+        loadServices();
+      } catch (err) {
+        msgEl.style.color="#ff6b6b"; msgEl.textContent="Save failed: " + err.message;
+      } finally {
+        btnEl.disabled = false;
+        btnEl.textContent = "Add to Services →";
+      }
+    };
+
+    window.deleteService = async function (id) {
+      if (!confirm("Delete this service card from Firebase?")) return;
+      try {
+        await deleteDoc(doc(db, "wevionServices", id));
+        loadServices();
+      } catch (err) {
+        alert("Delete failed: " + err.message);
+      }
+    };
+
+    async function loadServices() {
+      const listEl  = document.getElementById("service-list");
       const countEl = document.getElementById("service-count");
-      const s = JSON.parse(localStorage.getItem("wevionServices") || "[]");
-      countEl.textContent = s.length;
-      if (!s.length) { listEl.innerHTML = `<div class="empty-state"><span class="empty-icon">⚙️</span>No service cards yet.</div>`; return; }
-      listEl.innerHTML = s.map((sv, i) => `
-        <div class="proj-card">
-          ${sv.img ? `<img class="proj-img" src="${sv.img}" alt="${sv.title}" onerror="this.style.display='none'">` : ""}
-          <div class="proj-img-placeholder" style="${sv.img ? "display:none" : "display:flex"}">${sv.icon || "⚡"}</div>
-          <div class="proj-body">
-            <div class="proj-title">${sv.icon} ${sv.title}</div>
-            <div class="proj-desc">${sv.desc}</div>
-            <div class="proj-footer">
-              <span class="proj-tag">${sv.tag || "Service"}</span>
-              <button class="btn-delete" onclick="deleteService(${i})">Delete</button>
+      listEl.innerHTML = `<div class="empty-state"><span class="empty-icon">⏳</span>Loading...</div>`;
+
+      try {
+        const snap     = await getDocs(query(collection(db,"wevionServices"), orderBy("createdAt","asc")));
+        const services = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        countEl.textContent = services.length;
+
+        if (!services.length) { listEl.innerHTML=`<div class="empty-state"><span class="empty-icon">⚙️</span>No service cards yet.</div>`; return; }
+
+        listEl.innerHTML = services.map(s => `
+          <div class="proj-card">
+            ${s.img ? `<img class="proj-img" src="${s.img}" alt="${s.title}" onerror="this.style.display='none'">` : ""}
+            <div class="proj-img-placeholder" style="${s.img?"display:none":"display:flex"}">${s.icon||"⚡"}</div>
+            <div class="proj-body">
+              <div class="proj-title">${s.icon} ${s.title}</div>
+              <div class="proj-desc">${s.desc}</div>
+              <div class="proj-footer">
+                <span class="proj-tag">${s.tag||"Service"}</span>
+                <button class="btn-delete" onclick="deleteService('${s.id}')">Delete</button>
+              </div>
             </div>
-          </div>
-        </div>`).join("");
+          </div>`).join("");
+      } catch (err) {
+        listEl.innerHTML = `<div class="empty-state"><span class="empty-icon">❌</span>Failed to load: ${err.message}</div>`;
+      }
     }
-    function logout() {
+
+    window.logout = function () {
       document.getElementById("dashboard-page").style.display = "none";
       document.getElementById("login-page").classList.remove("hidden");
       document.getElementById("login-error").textContent = "";
-      document.getElementById("admin-id").value = "";
+      document.getElementById("admin-id").value   = "";
       document.getElementById("admin-pass").value = "";
-    }
+    };
+
     (function () {
       const logo = document.getElementById("dash-logo");
       let clicks = 0, timer;
@@ -956,117 +523,107 @@
         if (clicks >= 5) { clicks = 0; showChangePw(); }
       });
     })();
+
     function showModal(html) {
-      const existing = document.getElementById("admin-modal");
-      if (existing) existing.remove();
+      document.getElementById("admin-modal")?.remove();
       const div = document.createElement("div");
       div.id = "admin-modal";
       div.className = "modal-backdrop";
       div.innerHTML = html;
       document.body.appendChild(div);
     }
-    function closeModal() {
-      document.getElementById("admin-modal")?.remove();
-    }
-    function showChangePw() {
+
+    window.closeModal = function () { document.getElementById("admin-modal")?.remove(); };
+
+    window.showChangePw = function () {
       showModal(`
         <div class="modal-box">
           <button class="modal-close" onclick="closeModal()">✕</button>
           <div class="modal-title">🔐 Change Password</div>
           <p class="modal-sub">Enter your current credentials, then set a new password.</p>
-          <input type="text" id="cp-cur-id" placeholder="Current Admin ID">
-          <input type="password" id="cp-cur-pass" placeholder="Current Password">
-          <input type="text" id="cp-new-id" placeholder="New Admin ID">
-          <input type="password" id="cp-new-pass" placeholder="New Password">
+          <input type="text"     id="cp-cur-id"    placeholder="Current Admin ID">
+          <input type="password" id="cp-cur-pass"  placeholder="Current Password">
+          <input type="text"     id="cp-new-id"    placeholder="New Admin ID">
+          <input type="password" id="cp-new-pass"  placeholder="New Password">
           <input type="password" id="cp-new-pass2" placeholder="Confirm New Password">
           <button class="btn-primary" onclick="applyChangePw()">Update Credentials</button>
           <p class="modal-msg" id="cp-msg"></p>
-          <p class="modal-hint">After saving, copy the new hash from the console (F12) and paste into admin.html for permanent change.</p>
-        </div>
-      `);
-    }
-    async function applyChangePw() {
-      const curId = document.getElementById("cp-cur-id").value.trim();
-      const curPass = document.getElementById("cp-cur-pass").value;
-      const newId = document.getElementById("cp-new-id").value.trim();
-      const newPass = document.getElementById("cp-new-pass").value;
+          <p class="modal-hint">After saving, copy the new hash from the browser console (F12) and paste into admin.html for a permanent change.</p>
+        </div>`);
+    };
+
+    window.applyChangePw = async function () {
+      const curId    = document.getElementById("cp-cur-id").value.trim();
+      const curPass  = document.getElementById("cp-cur-pass").value;
+      const newId    = document.getElementById("cp-new-id").value.trim();
+      const newPass  = document.getElementById("cp-new-pass").value;
       const newPass2 = document.getElementById("cp-new-pass2").value;
-      const msgEl = document.getElementById("cp-msg");
-      if (!curId || !curPass || !newId || !newPass) {
-        msgEl.style.color = "#ff6b6b"; msgEl.textContent = "All fields are required."; return;
-      }
-      if (newPass !== newPass2) {
-        msgEl.style.color = "#ff6b6b"; msgEl.textContent = "New passwords do not match."; return;
-      }
-      const [curIdH, curPassH, newIdH, newPassH] = await Promise.all([
-        sha256(curId), sha256(curPass), sha256(newId), sha256(newPass)
-      ]);
-      if (curIdH !== getIdHash() || curPassH !== getPassHash()) {
-        msgEl.style.color = "#ff6b6b"; msgEl.textContent = "Current credentials are wrong."; return;
-      }
-      localStorage.setItem("wevionAdminIdHash", newIdH);
+      const msgEl    = document.getElementById("cp-msg");
+
+      if (!curId || !curPass || !newId || !newPass) { msgEl.style.color="#ff6b6b"; msgEl.textContent="All fields required."; return; }
+      if (newPass !== newPass2) { msgEl.style.color="#ff6b6b"; msgEl.textContent="New passwords do not match."; return; }
+
+      const [curIdH, curPassH, newIdH, newPassH] = await Promise.all([sha256(curId), sha256(curPass), sha256(newId), sha256(newPass)]);
+
+      if (curIdH !== getIdHash() || curPassH !== getPassHash()) { msgEl.style.color="#ff6b6b"; msgEl.textContent="Current credentials are wrong."; return; }
+
+      localStorage.setItem("wevionAdminIdHash",   newIdH);
       localStorage.setItem("wevionAdminPassHash", newPassH);
-      console.log("=== Paste these into admin.html ===");
-      console.log("ADMIN_ID_HASH   =", newIdH);
-      console.log("ADMIN_PASS_HASH =", newPassH);
-      msgEl.style.color = "#22c55e"; msgEl.textContent = "✓ Credentials updated!";
-      setTimeout(closeModal, 2000);
-    }
-    function showForgotPw() {
+      console.log("=== Paste into admin.html ===\nADMIN_ID_HASH   =", newIdH, "\nADMIN_PASS_HASH =", newPassH);
+      msgEl.style.color="#22c55e"; msgEl.textContent="✓ Credentials updated!";
+      setTimeout(window.closeModal, 2000);
+    };
+
+    window.showForgotPw = function () {
       showModal(`
         <div class="modal-box">
           <button class="modal-close" onclick="closeModal()">✕</button>
           <div class="modal-title">🔑 Forgot Password</div>
           <p class="modal-sub">Answer the security question to reset your password.</p>
-          <p style="color:#a78bfa;font-size:0.85rem;margin-bottom:16px;font-weight:600;">
-            What is the name of your studio?
-          </p>
+          <p style="color:#a78bfa;font-size:0.85rem;margin-bottom:16px;font-weight:600;">What is the name of your studio?</p>
           <input type="text" id="fp-answer" placeholder="Your answer...">
           <button class="btn-primary" onclick="checkForgotAnswer()">Verify Answer</button>
           <p class="modal-msg" id="fp-msg"></p>
-        </div>
-      `);
-    }
-    async function checkForgotAnswer() {
+        </div>`);
+    };
+
+    window.checkForgotAnswer = function () {
       const answer = document.getElementById("fp-answer").value.trim().toLowerCase();
-      const msgEl = document.getElementById("fp-msg");
-      const correctHash = "5ceb28c5b0bc5fd5f3e0d2e34d4a2b4cc6e7f3a8c7a3f1e5b9d2c4e6f8a1b3d5";
-      const answerHash = await sha256(answer);
+      const msgEl  = document.getElementById("fp-msg");
       if (answer === "wevion") {
         showModal(`
           <div class="modal-box">
             <button class="modal-close" onclick="closeModal()">✕</button>
             <div class="modal-title">✅ Identity Verified</div>
             <p class="modal-sub">Set your new credentials below.</p>
-            <input type="text" id="fp-new-id" placeholder="New Admin ID">
-            <input type="password" id="fp-new-pass" placeholder="New Password">
+            <input type="text"     id="fp-new-id"    placeholder="New Admin ID">
+            <input type="password" id="fp-new-pass"  placeholder="New Password">
             <input type="password" id="fp-new-pass2" placeholder="Confirm New Password">
             <button class="btn-primary" onclick="applyForgotPw()">Reset Password</button>
             <p class="modal-msg" id="fp-reset-msg"></p>
-          </div>
-        `);
+          </div>`);
       } else {
-        msgEl.style.color = "#ff6b6b";
-        msgEl.textContent = "Wrong answer. Hint: it's your studio name.";
+        msgEl.style.color="#ff6b6b"; msgEl.textContent="Wrong answer. Hint: it's your studio name.";
       }
-    }
-    async function applyForgotPw() {
-      const newId = document.getElementById("fp-new-id").value.trim();
-      const newPass = document.getElementById("fp-new-pass").value;
-      const newPass2 = document.getElementById("fp-new-pass2").value;
-      const msgEl = document.getElementById("fp-reset-msg");
-      if (!newId || !newPass) { msgEl.style.color = "#ff6b6b"; msgEl.textContent = "All fields required."; return; }
-      if (newPass !== newPass2) { msgEl.style.color = "#ff6b6b"; msgEl.textContent = "Passwords do not match."; return; }
-      const [newIdH, newPassH] = await Promise.all([sha256(newId), sha256(newPass)]);
-      localStorage.setItem("wevionAdminIdHash", newIdH);
-      localStorage.setItem("wevionAdminPassHash", newPassH);
-      console.log("=== Paste these into admin.html ===");
-      console.log("ADMIN_ID_HASH   =", newIdH);
-      console.log("ADMIN_PASS_HASH =", newPassH);
-      msgEl.style.color = "#22c55e"; msgEl.textContent = "✓ Password reset! You can log in now.";
-      setTimeout(closeModal, 2000);
-    }
-  </script>
-</body>
+    };
 
+    window.applyForgotPw = async function () {
+      const newId    = document.getElementById("fp-new-id").value.trim();
+      const newPass  = document.getElementById("fp-new-pass").value;
+      const newPass2 = document.getElementById("fp-new-pass2").value;
+      const msgEl    = document.getElementById("fp-reset-msg");
+
+      if (!newId || !newPass) { msgEl.style.color="#ff6b6b"; msgEl.textContent="All fields required."; return; }
+      if (newPass !== newPass2) { msgEl.style.color="#ff6b6b"; msgEl.textContent="Passwords do not match."; return; }
+
+      const [newIdH, newPassH] = await Promise.all([sha256(newId), sha256(newPass)]);
+      localStorage.setItem("wevionAdminIdHash",   newIdH);
+      localStorage.setItem("wevionAdminPassHash", newPassH);
+      console.log("=== Paste into admin.html ===\nADMIN_ID_HASH   =", newIdH, "\nADMIN_PASS_HASH =", newPassH);
+      msgEl.style.color="#22c55e"; msgEl.textContent="✓ Password reset! You can log in now.";
+      setTimeout(window.closeModal, 2000);
+    };
+  </script>
+
+</body>
 </html>
